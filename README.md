@@ -1,8 +1,3 @@
-<img align="right" alt="avatar" width="200" src="IMG/MY.webp"> 
-
-##👋� Welcome to My Workspace Assets
-
-
 <h1 align="center"> 👋</h1>
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
