@@ -2,7 +2,7 @@ name: Refresh profile visuals
 
 on:
   schedule:
-    # Daily at 05:17 UTC; GitHub Actions scheduled execution can be delayed.
+    # Daily, 05:17 UTC. GitHub may delay scheduled jobs.
     - cron: '17 5 * * *'
   workflow_dispatch:
   push:
@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: profile-visuals
+  group: oguzhanduyar-profile-visuals
   cancel-in-progress: false
 
 jobs:
@@ -23,9 +23,12 @@ jobs:
     if: github.repository == 'OguzhanDUYAR/OguzhanDUYAR'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -64,16 +67,51 @@ jobs:
             assets/snake-light.svg?palette=github-light
             assets/snake-dark.svg?palette=github-dark
 
-      - name: Commit new visuals only when they change
+      - name: Commit generated assets safely
         shell: bash
         run: |
           set -euo pipefail
-          git add -- assets/*.svg
-          if git diff --cached --quiet; then
-            echo 'No visual changes'
-            exit 0
-          fi
+
+          # Preserve only generated files outside the working tree.
+          # The static assets/hero.svg is intentionally excluded.
+          generated=(assets/{telemetry,languages,activity,stats,snake}-{dark,light}.svg)
+          for file in "${generated[@]}"; do
+            if [[ ! -s "$file" ]]; then
+              echo "::error file=$file::Expected generated SVG is missing or empty"
+              exit 1
+            fi
+          done
+
+          tmpdir="$(mktemp -d)"
+          trap 'rm -rf "$tmpdir"' EXIT
+          cp -- "${generated[@]}" "$tmpdir/"
+
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'chore(profile): refresh public metrics [skip ci]'
-          git push origin HEAD:main
+
+          # Restart from the latest remote main for each attempt, preserving
+          # user commits and avoiding non-fast-forward errors without force-push.
+          for attempt in 1 2 3 4 5; do
+            echo "Push attempt $attempt/5"
+            git fetch --no-tags origin main
+            git reset --hard origin/main
+            cp -- "$tmpdir"/*.svg assets/
+            git add -- "${generated[@]}"
+
+            if git diff --cached --quiet; then
+              echo 'No generated SVG changes; nothing to commit.'
+              exit 0
+            fi
+
+            git commit -m 'chore(profile): refresh public metrics [skip ci]'
+            if git push origin HEAD:main; then
+              echo 'Profile visuals updated successfully.'
+              exit 0
+            fi
+
+            echo "::warning::Push attempt $attempt failed; retrying on latest main."
+            sleep "$((attempt * 2))"
+          done
+
+          echo '::error::Could not push generated assets. Check branch protection and Actions write permissions.'
+          exit 1
