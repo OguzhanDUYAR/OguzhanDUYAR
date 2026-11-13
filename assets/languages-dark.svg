@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="0 0 1160 333" width="1160" height="333">
+<title id="title">Repository language landscape</title><desc id="desc">Primary language count across public, non-fork repositories</desc>
+<defs>
+  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#37d9cf"/><stop offset="1" stop-color="#90a3ff"/></linearGradient>
+  <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#2a3c56" stroke-opacity=".24" stroke-width="1"/></pattern>
+</defs>
+<rect width="1160" height="333" rx="22" fill="#090f1e"/>
+<rect width="1160" height="333" rx="22" fill="url(#grid)"/>
+<rect x="1" y="1" width="1158" height="331" rx="21" fill="none" stroke="#2a3c56"/>
+<g font-family="Inter,Segoe UI,Arial,sans-serif"><rect x="28" y="29" width="6" height="33" rx="3" fill="url(#accent)"/><text x="50" y="54" fill="#ecf4ff" font-size="24" font-weight="800" text-anchor="start" >LANGUAGE LANDSCAPE</text><text x="1130" y="52" fill="#9bb0cc" font-size="12" font-weight="700" text-anchor="end" >BY REPOSITORY  /  NOT CODE VOLUME</text><text x="580" y="185" fill="#9bb0cc" font-size="19" font-weight="500" text-anchor="middle" >Language data will appear after the first scheduled refresh</text><text x="31" y="313" fill="#9bb0cc" font-size="12" font-weight="500" text-anchor="start" >Data source: public GitHub REST API; no manual percentages</text></g></svg>

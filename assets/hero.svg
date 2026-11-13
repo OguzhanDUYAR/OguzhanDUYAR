@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1200" height="336" viewBox="0 0 1200 336">
+<title id="title">Oğuzhan Duyar — Computational Biology and Open-Source Engineering</title>
+<desc id="desc">A dark futuristic GitHub profile banner with science-inspired networks and abstract DNA motifs.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" x2="1" y1="1" y2="0"><stop stop-color="#080d19"/><stop offset=".53" stop-color="#10192d"/><stop offset="1" stop-color="#091523"/></linearGradient>
+  <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#48f5dc"/><stop offset=".5" stop-color="#83b6ff"/><stop offset="1" stop-color="#bf8dff"/></linearGradient>
+  <radialGradient id="halo"><stop stop-color="#18bec7" stop-opacity=".26"/><stop offset="1" stop-color="#18bec7" stop-opacity="0"/></radialGradient>
+  <pattern id="mesh" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#6b8cb2" stroke-width=".8" stroke-opacity=".18"/></pattern>
+  <clipPath id="clip"><rect x="0" y="0" width="1200" height="336" rx="24"/></clipPath>
+</defs>
+<g clip-path="url(#clip)">
+<rect width="1200" height="336" fill="url(#bg)"/>
+<rect width="1200" height="336" fill="url(#mesh)"/>
+<ellipse cx="1030" cy="156" rx="360" ry="300" fill="url(#halo)"/>
+<path d="M0 335H1200" stroke="url(#line)" stroke-width="4"/>
+<path d="M0 1H1200" stroke="#7895b3" opacity=".45"/>
+<path d="M24 53V24H54 M1175 53V24H1146 M24 279V311H54 M1175 279V311H1146" fill="none" stroke="#46d9d0" stroke-width="2" opacity=".65"/>
+<g font-family="Inter,Segoe UI,Arial,sans-serif">
+  <rect x="68" y="43" width="236" height="29" rx="14.5" fill="#153444" stroke="#2b7a88"/>
+  <circle cx="85" cy="57.5" r="4" fill="#50efbc"/>
+  <text x="99" y="62" font-size="13" letter-spacing="2.2" fill="#94e7da" font-weight="700">RESEARCH // BUILD // SHIP</text>
+  <text x="65" y="155" font-size="61" fill="#eef6ff" font-weight="800" letter-spacing="1.5">OĞUZHAN</text>
+  <text x="65" y="221" font-size="61" fill="url(#line)" font-weight="800" letter-spacing="1.5">DUYAR</text>
+  <text x="68" y="256" font-size="18" fill="#c7d9ec">Computational Biology</text>
+  <circle cx="296" cy="250" r="3.5" fill="#52f0d6"/>
+  <text x="313" y="256" font-size="18" fill="#c7d9ec">Open-Source Engineering</text>
+  <text x="68" y="293" font-size="12" fill="#759dbb" letter-spacing="2.5">FROM SEQUENCES TO SYSTEMS</text>
+  <text x="1114" y="43" text-anchor="end" font-size="12" fill="#84a8be" letter-spacing="2">BIO  ×  CODE</text>
+</g>
+<!-- Dot matrix and two intertwined strands are a graphical motif, not a biological sequence. -->
+<g opacity=".84" fill="none" stroke-width="2.7">
+  <path d="M850 52 C940 82 940 112 850 142 S760 202 850 233 S940 291 850 319" stroke="#55e8d7"/>
+  <path d="M1030 52 C940 82 940 112 1030 142 S1120 202 1030 233 S940 291 1030 319" stroke="#ae9aff"/>
+</g>
+<g stroke="#507b9a" stroke-width="1.7" opacity=".82">
+  <path d="M850 52H1030M878 64H1002M899 78H981M920 94H960M907 112H973M880 128H1000M850 142H1030M824 160H1056M810 176H1070M821 192H1059M846 208H1034M879 223H1001M905 238H975M923 254H957M909 270H971M881 285H999M850 301H1030"/>
+</g>
+<g fill="#a9e3ff">
+  <circle cx="850" cy="52" r="5"/><circle cx="1030" cy="52" r="5"/>
+  <circle cx="850" cy="142" r="5"/><circle cx="1030" cy="142" r="5"/>
+  <circle cx="846" cy="208" r="5"/><circle cx="1034" cy="208" r="5"/>
+  <circle cx="850" cy="301" r="5"/><circle cx="1030" cy="301" r="5"/>
+</g>
+<g fill="none" stroke="#63a2b4" stroke-width="1.4" opacity=".35">
+  <circle cx="940" cy="178" r="157"/><circle cx="940" cy="178" r="133"/>
+  <path d="M720 174h45M1115 174h45M940 7v33M940 315v20"/>
+</g>
+<g fill="#49e6d5"><circle cx="754" cy="65" r="3"/><circle cx="1119" cy="94" r="4"/><circle cx="1094" cy="277" r="2.5"/><circle cx="765" cy="277" r="2.5"/></g>
+</g>
+</svg>
