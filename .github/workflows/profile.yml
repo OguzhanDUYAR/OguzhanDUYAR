@@ -1,0 +1,79 @@
+name: Refresh profile visuals
+
+on:
+  schedule:
+    # Daily at 05:17 UTC; GitHub Actions scheduled execution can be delayed.
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/profile.yml'
+      - 'scripts/build_profile.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-visuals
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.repository == 'OguzhanDUYAR/OguzhanDUYAR'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Validate renderer
+        run: python -m unittest discover -s tests -v
+
+      - name: Generate public repository telemetry
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/build_profile.py
+
+      - name: Generate dark GitHub stats
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: stats
+          options: username=OguzhanDUYAR&theme=github_dark&show_icons=true&hide_border=true&include_all_commits=true
+          path: assets/stats-dark.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate light GitHub stats
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: stats
+          options: username=OguzhanDUYAR&theme=default&show_icons=true&hide_border=true&include_all_commits=true
+          path: assets/stats-light.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Animate GitHub contribution grid
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: OguzhanDUYAR
+          outputs: |
+            assets/snake-light.svg?palette=github-light
+            assets/snake-dark.svg?palette=github-dark
+
+      - name: Commit new visuals only when they change
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- assets/*.svg
+          if git diff --cached --quiet; then
+            echo 'No visual changes'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore(profile): refresh public metrics [skip ci]'
+          git push origin HEAD:main
